@@ -12,9 +12,10 @@ namespace GuessTheNumber
         {
             Console.WriteLine("Guess the number !!!");
             Console.WriteLine("Choose a number between 0 and 100");
-            string numbr = Console.ReadLine();
-            bool result = Int32.TryParse(numbr,out int nr);
-            while (!result)
+            int attempt = 0; 
+            string numbr = Console.ReadLine();// number to read from keyboard
+            bool result = Int32.TryParse(numbr,out int nr); // first try to convert the number to int 
+            while (!result) // if the user has provided a wrong character than int , the program will tell him to give us a good number
             {
                 
                     Console.WriteLine("{0} is not a number , please provide another number:",numbr);
@@ -23,15 +24,15 @@ namespace GuessTheNumber
 
             }
 
-            while (nr < 0 || nr > 100)
-            {
+            // if the value is less than 0 and higher than 100 ,the program will tell him to give us a good number
+                while (nr < 0 || nr > 100) { 
                 Console.WriteLine("Please give us another number");
                 numbr = Console.ReadLine();
                 result = Int32.TryParse(numbr, out nr);
             }
 
-           // nr = int.Parse(numbr);
             Console.WriteLine("Your wrote th number : {0}", nr);
+            
             //Generate random number 
 
             Random rng = new Random();
@@ -46,6 +47,7 @@ namespace GuessTheNumber
                     //Overwrite the number 
                     numbr = Console.ReadLine();
                     nr = int.Parse(numbr);
+                    attempt = attempt + 1;
 
                 }
 
@@ -55,12 +57,14 @@ namespace GuessTheNumber
                     //Overwrite the number 
                     numbr = Console.ReadLine();
                     nr = int.Parse(numbr);
+                    attempt = attempt + 1;
                 }
 
                 //If the number is equal to our number finish the program 
                 if (nr == r)
                 {
                     Console.WriteLine("Congrats , you WINNNNN!!!!");
+                    Console.WriteLine("You made {0} attempts", attempt);
                 }
               
             }
